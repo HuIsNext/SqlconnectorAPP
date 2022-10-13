@@ -52,7 +52,7 @@ namespace sqlConnectorAPP
         //create database and table
         private void Create_db()
         {
-            if (!System.IO.File.Exists(path))
+            if (System.IO.File.Exists(cs))
             {
                 SQLiteConnection.CreateFile(path);
                 using (var sqlite = new SQLiteConnection(@"Data Source=" + path))
