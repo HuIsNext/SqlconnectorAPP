@@ -49,7 +49,7 @@
             this.加入連線設定ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1204, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1204, 27);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -58,7 +58,7 @@
             this.加入連線設定ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.加入連線設定ToolStripMenuItem1});
             this.加入連線設定ToolStripMenuItem.Name = "加入連線設定ToolStripMenuItem";
-            this.加入連線設定ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.加入連線設定ToolStripMenuItem.Size = new System.Drawing.Size(53, 23);
             this.加入連線設定ToolStripMenuItem.Text = "設定";
             // 
             // 加入連線設定ToolStripMenuItem1
@@ -84,6 +84,8 @@
             this.cbbDBName.Name = "cbbDBName";
             this.cbbDBName.Size = new System.Drawing.Size(121, 23);
             this.cbbDBName.TabIndex = 2;
+            this.cbbDBName.SelectedIndexChanged += new System.EventHandler(this.cbbDBName_SelectedIndexChanged);
+            this.cbbDBName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbbDBName_MouseClick);
             // 
             // listBox1
             // 

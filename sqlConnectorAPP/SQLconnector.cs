@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace sqlConnectorAPP
 {
@@ -38,12 +39,14 @@ namespace sqlConnectorAPP
 
             var sqllitecon = new SQLiteConnection(cs);
             sqllitecon.Open();
+
             using (SQLiteConnection conn = new SQLiteConnection(sqllitecon))
             {
                 SQLiteDataAdapter sda = new SQLiteDataAdapter("SELECT dbname,ConnStr FROM DBconnection", conn);
                 DataSet dataset = new DataSet();
                 DataTable table = new DataTable();
                 sda.Fill(table);
+                cbbDBName.DataSource = null;
                 cbbDBName.DataSource = table;
                 cbbDBName.DisplayMember = "dbname";
                 cbbDBName.ValueMember = "ConnStr";
@@ -53,13 +56,14 @@ namespace sqlConnectorAPP
 
         private void dgvDBname_show()
         {
-            if (cbbDBName.SelectedValue.ToString() != null)
-            {
-                SqlConnection con = new SqlConnection(cbbDBName.SelectedValue.ToString());
-                DataSet ds = new DataSet();
+            listBox1.Items.Clear();
 
+            if (cbbDBName.SelectedItem != null)
+            {
                 try
                 {
+                    SqlConnection con = new SqlConnection(cbbDBName.SelectedValue.ToString());
+                    DataSet ds = new DataSet();
                     con.Open();
                     SqlCommand cmd = new SqlCommand("SELECT name FROM sys.tables", con);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -83,8 +87,7 @@ namespace sqlConnectorAPP
 
         private void SQLconnectorLoad(object sender, EventArgs e)
         {
-            cbdata_show();
-            dgvDBname_show();
+
         }
 
         private void btnSqlCommand_Click(object sender, EventArgs e)
@@ -120,6 +123,18 @@ namespace sqlConnectorAPP
             {
                 MessageBox.Show(ex.ToString(), "CatchMessage");
             }
+        }
+
+        private void cbbDBName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbdata_show();
+            dgvDBname_show();
+        }
+
+        private void cbbDBName_MouseClick(object sender, MouseEventArgs e)
+        {
+            cbdata_show();
+            dgvDBname_show();
         }
     }
 }

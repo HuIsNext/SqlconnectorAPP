@@ -29,6 +29,7 @@ namespace sqlConnectorAPP
 
         private void data_show()
         {
+            cbbDBtype.Items.Clear();
             cbbDBtype.DisplayMember = "Text";
             cbbDBtype.ValueMember = "Value";
 
@@ -117,26 +118,25 @@ namespace sqlConnectorAPP
             var con = new SQLiteConnection(cs);
             con.Open();
             var cmd = new SQLiteCommand(con);
-            string cellValue = Convert.ToString(dataGridView1.SelectedRows[0].Cells["DBname"].Value);
-            if (dataGridView1.CurrentRow.Index == dataGridView1.Rows.Count - 1)
-            {
-                try
-                {
-                    cmd.CommandText = "DELETE FROM DBconnection where DBname =@DBname";
-                    cmd.Prepare();
-                    cmd.Parameters.AddWithValue("@DBname", cellValue);
-                    cmd.ExecuteNonQuery();
-                    dataGridView1.Rows.Clear();
-                    data_show();
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("cannot delete data");
-                    return;
 
-                }
+            try
+            {
+                string cellValue = Convert.ToString(dataGridView1.SelectedRows[0].Cells["DBname"].Value);
+                cmd.CommandText = "DELETE FROM DBconnection where DBname =@DBname";
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@DBname", cellValue);
+                cmd.ExecuteNonQuery();
+                dataGridView1.Rows.Clear();
+                data_show();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("cannot delete data");
+                return;
+
             }
         }
+
 
         private void btnTestConn_Click(object sender, EventArgs e)
         {
@@ -162,6 +162,11 @@ namespace sqlConnectorAPP
                 string ErrorMsg = "Failure:" + ex.Message.ToString();
                 MessageBox.Show(ErrorMsg);
             }
+        }
+
+        private void cbbDBtype_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

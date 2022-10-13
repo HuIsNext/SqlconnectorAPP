@@ -157,6 +157,7 @@
             this.cbbDBtype.Name = "cbbDBtype";
             this.cbbDBtype.Size = new System.Drawing.Size(225, 23);
             this.cbbDBtype.TabIndex = 10;
+            this.cbbDBtype.SelectedIndexChanged += new System.EventHandler(this.cbbDBtype_SelectedIndexChanged);
             // 
             // AddConnection
             // 
